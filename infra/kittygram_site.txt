@@ -1,0 +1,5 @@
+IP: 158.160.24.251;
+name_taski: https://taskimyhost.hopto.org;
+name_kittygram: https://kittygramsite.hopto.org;
+login: administrator;
+password: administrator;

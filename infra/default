@@ -1,0 +1,77 @@
+server {
+
+    server_name  taskimyhost.hopto.org;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location / {
+        root   /var/www/taski;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/taskimyhost.hopto.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/taskimyhost.hopto.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+
+    server_name  kittygramsite.hopto.org;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
+    location / {
+        root   /var/www/infra_sprint1;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/kittygramsite.hopto.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/kittygramsite.hopto.org/privkey.pem; # managed by Certb>
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = taskimyhost.hopto.org) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 158.160.12.5 koyote92.hopto.org;
+    return 404; # managed by Certbot
+
+
+}
+
+server {
+    if ($host = kittygramsite.hopto.org) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    listen 80;
+    server_name 158.160.24.251 kittygramsite.hopto.org;
+    return 404; # managed by Certbot
+
+
+}
