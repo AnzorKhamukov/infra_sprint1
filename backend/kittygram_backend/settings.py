@@ -12,22 +12,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('KEY')
 
-DEBUG = False
+DEBUG = os.environ.get('DEBUG_PARAMETR')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '158.160.24.251', 'kittygramsite.hopto.org']
+ALLOWED_HOSTS = os.environ.get('HOSTS')
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+LOCAL_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'djoser',
     'cats.apps.CatsConfig',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -98,7 +103,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = 'static_backend/'
+STATIC_URL = 'static_backend'
 STATIC_ROOT = BASE_DIR / 'static_backend'
 
 MEDIA_URL = '/media/'

@@ -2,6 +2,8 @@ server {
 
     server_name  taskimyhost.hopto.org;
 
+    server_tokens off;
+
     location /api/ {
         proxy_pass http://127.0.0.1:8000;
     }
@@ -14,6 +16,8 @@ server {
         root   /var/www/taski;
         index  index.html index.htm;
         try_files $uri /index.html;
+        gzip on;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
     }
 
     listen 443 ssl; # managed by Certbot
@@ -28,6 +32,8 @@ server {
 
     server_name  kittygramsite.hopto.org;
 
+    server_tokens off;
+
     location /api/ {
         proxy_pass http://127.0.0.1:8080;
     }
@@ -40,6 +46,8 @@ server {
         root   /var/www/infra_sprint1;
         index  index.html index.htm;
         try_files $uri /index.html;
+        gzip on;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
     }
 
     listen 443 ssl; # managed by Certbot
