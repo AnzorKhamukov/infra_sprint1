@@ -12,7 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('KEY')
 
-DEBUG = os.environ.get('DEBUG_PARAMETR')
+DEBUG = False
+
+#DEBUG = os.environ.get('DEBUG_PARAMETR')
+#pytest не пропустил в таком виде, видимо нужно явно указать
 
 ALLOWED_HOSTS = os.environ.get('HOSTS')
 
